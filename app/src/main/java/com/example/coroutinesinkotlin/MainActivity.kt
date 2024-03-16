@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
@@ -35,18 +36,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         Log.d(TAG, "${Thread.currentThread().name}")
 
-        CoroutineScope(Dispatchers.Main).launch {
-            Task1()
-        }
+        val coroutineBuilders = CoroutineBuilders()
 
-        CoroutineScope(Dispatchers.Main).launch {
-            Task2()
-        }
-
-
+        // Counter Updation
         binding.buttonUpdateCounter.setOnClickListener {
 
             Log.d(TAG, "${Thread.currentThread().name}")
@@ -54,8 +48,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        // Coroutine Scope, Context and Dispatchers
         binding.buttonExecuteTask.setOnClickListener {
 
+            // Coroutine Scope, Context and Dispatchers
             CoroutineScope(Dispatchers.IO).launch {
                 Log.d(TAG, "${Thread.currentThread().name}")
                 executeLongTask()
@@ -69,15 +65,37 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "${Thread.currentThread().name}")
             }
 
-/*
+            /*
 
-            // Before we used Threads like this
-            thread(start = true){
-                executeLongTask()
-            }
-*/
+                        // Before we used Threads like this
+                        thread(start = true){
+                            executeLongTask()
+                        }
+            */
 
         }
+
+        //Suspending function
+        CoroutineScope(Dispatchers.Main).launch {
+            Task1()
+        }
+
+        //Suspending function
+        CoroutineScope(Dispatchers.Main).launch {
+            Task2()
+        }
+
+        // Coroutine Builders
+        CoroutineScope(Dispatchers.IO).launch {
+            // launch() // When you don't care about the result (Fire & Forget)
+            coroutineBuilders.launchCoroutineBuilder()
+            // async()  // When you expect some result/output from your coroutine
+            coroutineBuilders.asyncCoroutineBuilder()
+            // Another for async
+            coroutineBuilders.printFollowers()
+        }
+
+
 
     }
 
