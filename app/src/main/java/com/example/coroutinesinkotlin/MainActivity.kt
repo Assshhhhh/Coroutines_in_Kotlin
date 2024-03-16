@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "${Thread.currentThread().name}")
 
         val coroutineBuilders = CoroutineBuilders()
+        val coroutineJobs = CoroutineJobs()
 
         // Counter Updation
         binding.buttonUpdateCounter.setOnClickListener {
@@ -95,7 +96,11 @@ class MainActivity : AppCompatActivity() {
             coroutineBuilders.printFollowers()
         }
 
-
+        // Coroutine Jobs, Hierarchy & Cancellation
+        GlobalScope.launch(Dispatchers.Main) {
+            coroutineJobs.execute()
+            coroutineJobs.executeLongRunningTask()
+        }
 
     }
 
