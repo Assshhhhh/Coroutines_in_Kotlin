@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
         val coroutineBuilders = CoroutineBuilders()
         val coroutineJobs = CoroutineJobs()
+        val withContext = WithContext()
+        val runBlock = RunBlock()
 
         // Counter Updation
         binding.buttonUpdateCounter.setOnClickListener {
@@ -97,9 +99,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Coroutine Jobs, Hierarchy & Cancellation
+/*
         GlobalScope.launch(Dispatchers.Main) {
             coroutineJobs.execute()
             coroutineJobs.executeLongRunningTask()
+        }
+*/
+
+        // withContext()    // Suspend Function, Blocking Nature
+        GlobalScope.launch {
+            withContext.executeTask()
+        }
+
+        // runBlock()   //
+        GlobalScope.launch {
+            runBlock.executeTask()
         }
 
     }
