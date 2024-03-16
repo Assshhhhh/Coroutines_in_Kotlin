@@ -41,5 +41,16 @@
         android:layout_margin="16dp"
         />
 
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E64A19"
+        android:id="@+id/button_move_to_next_activity"
+        android:text="View Model Activity"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="50dp"
+        />
+
 
 </LinearLayout>

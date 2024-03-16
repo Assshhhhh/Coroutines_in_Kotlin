@@ -1,24 +1,24 @@
 package com.example.coroutinesinkotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.coroutinesinkotlin.CoroutineClasses.CoroutineBuilders
+import com.example.coroutinesinkotlin.CoroutineClasses.CoroutineJobs
+import com.example.coroutinesinkotlin.CoroutineClasses.RunBlock
+import com.example.coroutinesinkotlin.CoroutineClasses.WithContext
 import com.example.coroutinesinkotlin.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.yield
 import kotlin.concurrent.thread
-import kotlin.coroutines.CoroutineContext
 
 private lateinit var binding: ActivityMainBinding
 
@@ -49,6 +49,12 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "${Thread.currentThread().name}")
             binding.tvCounter.text = "${binding.tvCounter.text.toString().toInt() + 1}"
 
+        }
+
+        // View Model Activity
+        binding.buttonMoveToNextActivity.setOnClickListener {
+            finish()
+            startActivity(Intent(this, LifecycleAndViewModelScopeActivity::class.java))
         }
 
         // Coroutine Scope, Context and Dispatchers

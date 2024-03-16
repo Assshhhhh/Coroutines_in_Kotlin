@@ -1,4 +1,4 @@
-package com.example.coroutinesinkotlin
+package com.example.coroutinesinkotlin.CoroutineClasses
 
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
